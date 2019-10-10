@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,7 +54,7 @@ public class EmployeeController {
 
 		try {
 			newEmp = serv.createEmployee(employee);
-			resp.setStatus(200);
+			resp.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/" + newEmp.getId());
 			resp.setHeader("Location", url.toString());
@@ -64,6 +65,22 @@ public class EmployeeController {
 		}
 		return newEmp;
 	}
+	
+	@DeleteMapping("employees/{id}")
+	public void disableEmployee(@PathVariable("id") int id, HttpServletResponse resp) {
+		try {
+			if (serv.disableEmployee(id)) {
+				resp.setStatus(204);
+			} else {
+				resp.setStatus(404);
+			}
+			
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+	}
+
 }
 
 

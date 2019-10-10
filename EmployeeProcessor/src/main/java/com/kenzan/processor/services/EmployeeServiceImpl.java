@@ -55,9 +55,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public boolean deleteEmployee(int id) {
-		repo.deleteById(id);
-		if (!repo.findById(id).isPresent()) {
+	public boolean disableEmployee(int id) {
+		Optional<Employee> disabledOpt = repo.findById(id);
+		Employee disabledEmp = null;
+
+		if (disabledOpt.isPresent()) {
+			disabledEmp = disabledOpt.get();
+			disabledEmp.setStatus(false);
+			repo.saveAndFlush(disabledEmp);
 			return true;
 		}
 		return false;

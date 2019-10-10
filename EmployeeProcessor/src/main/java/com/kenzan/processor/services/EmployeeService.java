@@ -9,5 +9,5 @@ public interface EmployeeService {
 	Employee getEmployeeById(int id);
 	Employee createEmployee(Employee emp);
 	Employee updateEmployee(int id, Employee emp);
-	boolean deleteEmployee(int id);
+	boolean disableEmployee(int id);
 }
