@@ -17,37 +17,37 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public List<Employee> getAllEmployees(){
-		return repo.findAll();
+		return repo.queryForActiveEmployees();
 	}
 	
 	@Override
 	public Employee getEmployeeById(int id) {
-		Employee employ = null;
+		Employee employee = null;
 		if (repo.findById(id).isPresent()) {
-			employ = repo.findById(id).get();
+			employee = repo.queryForActiveEmployeeById(id);
 		}
-		return employ; 
+		return employee; 
 	}
 	
 	@Override
-	public Employee createEmployee(Employee employ) {
-		Employee created = repo.saveAndFlush(employ);
+	public Employee createEmployee(Employee employee) {
+		Employee created = repo.saveAndFlush(employee);
 		return created;
 	}
 	
 	@Override
-	public Employee updateEmployee(int id, Employee emp) {
+	public Employee updateEmployee(int id, Employee employee) {
 		Optional<Employee> managedOpt = repo.findById(id);
 		Employee managed = null;
 		if (managedOpt.isPresent()) {
 			managed = managedOpt.get();
 
-			managed.setFirstName(emp.getFirstName());
-			managed.setLastName(emp.getLastName());
-			managed.setMiddleInitial(emp.getMiddleInitial());
-			managed.setDateOfBirth(emp.getDateOfBirth());
-			managed.setDateOfEmployment(emp.getDateOfEmployment());
-			managed.setStatus(emp.getStatus());
+			managed.setFirstName(employee.getFirstName());
+			managed.setLastName(employee.getLastName());
+			managed.setMiddleInitial(employee.getMiddleInitial());
+			managed.setDateOfBirth(employee.getDateOfBirth());
+			managed.setDateOfEmployment(employee.getDateOfEmployment());
+			managed.setStatus(employee.getStatus());
 			
 			repo.saveAndFlush(managed);
 		}
@@ -55,9 +55,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public boolean deleteEmployee(int id) {
-		repo.deleteById(id);
-		if (!repo.findById(id).isPresent()) {
+	public boolean disableEmployee(int id) {
+		Optional<Employee> disabledOpt = repo.findById(id);
+		Employee disabledEmp = null;
+
+		if (disabledOpt.isPresent()) {
+			disabledEmp = disabledOpt.get();
+			disabledEmp.setStatus(false);
+			repo.saveAndFlush(disabledEmp);
 			return true;
 		}
 		return false;
