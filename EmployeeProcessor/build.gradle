@@ -26,5 +26,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'mysql:mysql-connector-java'
 	compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.10.0'
+	compile('org.springframework.boot:spring-boot-starter-security')
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
