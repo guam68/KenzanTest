@@ -31,6 +31,22 @@ CREATE TABLE IF NOT EXISTS `employee` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user` ;
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(45) NULL,
+  `password` TEXT NULL,
+  `role` VARCHAR(45) NOT NULL DEFAULT 'ROLE_USER',
+  `enabled` TINYINT NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS employee;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -50,6 +66,16 @@ USE `employeedb`;
 INSERT INTO `employee` (`id`, `first_name`, `middle_initial`, `last_name`, `date_of_birth`, `date_of_employment`, `status`) VALUES (1, 'James', 'E', 'Taylor', '1984-10-12', '2015-01-30', 1);
 INSERT INTO `employee` (`id`, `first_name`, `middle_initial`, `last_name`, `date_of_birth`, `date_of_employment`, `status`) VALUES (2, 'Sarah', NULL, 'Conner', '1967-04-24', '2018-04-13', 1);
 INSERT INTO `employee` (`id`, `first_name`, `middle_initial`, `last_name`, `date_of_birth`, `date_of_employment`, `status`) VALUES (3, 'Paul', 'R', 'West', '1990-11-02', '2019-06-12', 0);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `employeedb`;
+INSERT INTO `user` (`id`, `username`, `password`, `role`, `enabled`) VALUES (1, 'kenzan', '$2a$10$KqSKT7QByBooYVE6WDicNucr5gqcME6EcdquH0M5t//OS18E1OlZ6', 'ROLE_USER', 1);
 
 COMMIT;
 
