@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NULL,
   `password` TEXT NULL,
+  `role` VARCHAR(45) NOT NULL DEFAULT 'ROLE_USER',
+  `enabled` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB;
@@ -73,7 +75,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `employeedb`;
-INSERT INTO `user` (`id`, `username`, `password`) VALUES (1, 'kenzan', '$2a$10$KqSKT7QByBooYVE6WDicNucr5gqcME6EcdquH0M5t//OS18E1OlZ6');
+INSERT INTO `user` (`id`, `username`, `password`, `role`, `enabled`) VALUES (1, 'kenzan', '$2a$10$KqSKT7QByBooYVE6WDicNucr5gqcME6EcdquH0M5t//OS18E1OlZ6', 'ROLE_USER', 1);
 
 COMMIT;
 
