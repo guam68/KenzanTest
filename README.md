@@ -4,7 +4,7 @@
 
 | Method | URI | Description | Requires Body | Requires Auth |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| GET | `http://3.13.232:8080/EmployeeProcessor/api/employees`| Retrieves full list employees, excluding those marked as inactive | `false` | `false` | 
+| GET | `http://3.13.232:8080/EmployeeProcessor/api/employees`| <pre>Retrieves full list employees,<br/>excluding those marked as inactive</pre> | `false` | `false` | 
 | GET | `http://3.13.2.32:8080/EmployeeProcessor/api/employees/{id}` | Retrieves an employee with specified id or returns 404 if inactive or not found | `false` | `false` |
 | POST | `http://3.13.2.32:8080/EmployeeProcessor/api/employees` | Creates new employee. Must contain a first and last name at minimum. Defaults status to active | `true` | `false` |
 | PUT | `http://3.13.2.32:8080/EmployeeProcessor/api/employees/{id}` | Updates employee with specified id. Must contain a first and last name at minimum. Fields not specified in body of request will be nulled | `true` | `false` |
