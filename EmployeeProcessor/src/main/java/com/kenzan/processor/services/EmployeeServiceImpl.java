@@ -31,6 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	@Override
 	public Employee createEmployee(Employee employee) {
+		employee.setStatus(true);
 		Employee created = repo.saveAndFlush(employee);
 		return created;
 	}
